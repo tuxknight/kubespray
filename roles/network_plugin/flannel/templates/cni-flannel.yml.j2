@@ -78,6 +78,13 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+{% if flannel_backend_type is defined and flannel_backend_type == "ali-vpc" %}        - name: ACCESS_KEY_ID
+          value: {{ flannel_access_key_id }}
+        - name: ACCESS_KEY_SECRET
+          value: {{ flannel_access_key_secret }}{% endif %}
+
+#        - name: GODEBUG
+#          value: netdns=cgo
         volumeMounts:
         - name: run
           mountPath: /run
